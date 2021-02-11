@@ -2,20 +2,15 @@ import React, { useState } from "react";
 
 function CreateArea(props) {
   const [text, setText] = useState({ title: "", content: "" });
-  const [notebook, setNotebook] = useState([]);
   function updateText(event) {
     //console.log(event.target);
     const { name, value } = event.target;
     setText({ ...text, [name]: value });
   }
   function updateNotebook(event) {
-    setNotebook((prevNote) => {
-      return [...prevNote, text];
-    });
-    console.log(notebook);
-
+    //setNotebook([...notebook, text]);
     setText({ title: "", content: "" });
-    props.renderData(notebook);
+    props.renderData(text);
     event.preventDefault();
   }
   return (

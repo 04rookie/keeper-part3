@@ -5,17 +5,30 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
-  const [mainCopy, setMainCopy] = useState([]);
-  function renderData(notebook) {
+  const [notebook, setNotebook] = useState([]);
+  function renderData(text) {
     console.log(notebook);
-    setMainCopy([...mainCopy, notebook]);
+    setNotebook([...notebook, text]);
+  }
+  function deleteData(id) {
+    setNotebook(
+      notebook.filter((notes, ids) => {
+        return ids !== id;
+      })
+    );
   }
   return (
     <div>
       <Header />
       <CreateArea renderData={renderData} />
-      {mainCopy.map((notes, index) => (
-        <Note key={index} title={notes.title} content={notes.content} />
+      {notebook.map((notes, index) => (
+        <Note
+          key={index}
+          id={index}
+          title={notes.title}
+          content={notes.content}
+          deleteData={deleteData}
+        />
       ))}
       <Footer />
     </div>
